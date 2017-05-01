@@ -57,7 +57,7 @@ If you want to support https, you should add more keys to config/http.json
 ```js
 const pomeloHttp = require('pomelo-http');
 const path = require('path');
-app.configure('development', 'gamehttp', function() {
+app.configure('development', 'gamehttp', () => {
   app.loadConfig('httpConfig', path.join(app.getBase(), 'config/http.json'));
   app.use(pomeloHttp, {
     http: app.get('httpConfig')[app.getServerId()]
@@ -66,8 +66,9 @@ app.configure('development', 'gamehttp', function() {
 ```
 #####5. Create app/servers/gamehttp/route/testRoute.js
 ```js
-module.exports = (app, router) => {
-
+module.exports = (app, express) => {
+  const router = express.Router();
+  
   router.get('/test', (req, res) => {
     res.send('test success')
   });
@@ -138,8 +139,9 @@ app.configure('development', 'gamehttp', () => {
 ```
 #####5. Create app/servers/gamehttp/route/testRoute.js
 ```js
-module.exports = (app, router) => {
-
+module.exports = (app, express) => {
+  const router = express.Router();
+  
   router.get('/test', (req, res) => {
     res.send('test success')
   });

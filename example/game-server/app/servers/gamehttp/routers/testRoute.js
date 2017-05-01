@@ -1,14 +1,15 @@
-module.exports = (app, http, plugin) => {
+module.exports = (app, express, plugin) => {
+	const router = express.Router();
 	if (plugin.useSSL) {
-		http.get('/testHttps', (req, res, next) => {
+		router.get('/testHttps', (req, res, next) => {
 			res.set('resp', 'https success');
 			next();
 		});
 	} else {
-		http.get('/testHttp', (req, res, next) => {
+		router.get('/testHttp', (req, res, next) => {
 			res.set('resp', 'http success');
 			next();
 		});
 	}
-	return http;
+	return router;
 };
